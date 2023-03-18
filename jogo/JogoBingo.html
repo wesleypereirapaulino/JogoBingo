@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Jogo de Bingo</title>
+</head>
+<body>
+    <div class="loading">
+        <img src="assets/image/loading.gif" alt="Imagem carregando jogo">
+    </div>
+    <div class="containerprincipal">
+        <div class="container jogador">
+            <img src="assets/image/atencao.png" alt="Icone ateção" class="padrao">
+            <h3>                
+                 JOGADOR: <input id="Nome_Jogador" disabled maxlength="10"/></h3>
+            <div class="cartela">
+                <div id="paineljogador" class="animebutton">
+                    <button onclick="Marcador(0)"></button>
+                    <button onclick="Marcador(1)"></button>
+                    <button onclick="Marcador(2)"></button>
+                    <button onclick="Marcador(3)"></button>
+                    <button onclick="Marcador(4)"></button>
+                    <button onclick="Marcador(5)"></button>
+                    <button onclick="Marcador(6)"></button>
+                    <button onclick="Marcador(7)"></button>
+                    <button onclick="Marcador(8)"></button>
+                    <button onclick="Marcador(9)"></button>
+                    <button onclick="Marcador(10)"></button>
+                    <button onclick="Marcador(11)"></button>
+                    <button onclick="Marcador(12)"></button>
+                    <button onclick="Marcador(13)"></button>
+                    <button onclick="Marcador(14)"></button>
+                    <button onclick="Marcador(15)"></button>
+                    <button onclick="Marcador(16)"></button>
+                    <button onclick="Marcador(17)"></button>
+                    <button onclick="Marcador(18)"></button>
+                    <button onclick="Marcador(19)"></button>
+                </div>
+            </div>
+            <div class="winner"></div>
+            <div class="gameover"></div>           
+        </div>
+        <!-- A Bola atual sorteada aparecem nesse painel-->
+        <div class="monitorSorteio">
+            <div class="BolaSortedaPainel"></div>
+            <div class="bolasSorteio"></div>
+        </div>
+        <!------------------------------------------------>
+
+        <div class="container maquina">
+            <img src="assets/image/atencao.png" alt="Icone ateção" class="padrao">
+            <h3>MAQUINA</h3>
+            <div class="cartela">
+                <ul id="painelmaquina">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="winner"></div>
+            <div class="gameover"></div>
+        </div>
+    </div>
+    <!--AREA DOS BOTOES DO JOGO-->
+    <div class="painel_Btn">
+        <button onclick="JogoAuto()" id="Status" title="Marcar bolas automaticamente">Marcar Bolas Automaticamente</button>
+        <button onclick="JogoManual()" id="Manual" title="Marcar bolas Manualmente">Marcar Bolas Manualmente</button>
+        <button onclick="GerarCartelas()" id="Btn_Gerar_Cartelas">Gerar Cartelas</button>
+        <button onclick="GerarOutraCartela()" class="novacartela" disabled title="Para gerar uma nova cartela para o jogador">Gerar nova cartela</button>
+        <button onclick="StartGame()" id="Btn_Comeca_Jogo" disabled>Começar jogo</button>
+        <button onclick="NewGame()" id="New_Game" disabled>Novo Jogo</button>
+    </div>
+    <div class="paineldavitoria"></div>
+    <audio src="assets/audio/acertos.mp3" id="audio"></audio>
+    <audio src="assets/audio/bolas.mp3" id="bolas"></audio>
+    <audio src="assets/audio/bingo.mp3" id="bingo"></audio>
+    <audio src="assets/audio/musicajogo.mp3" id="fim"></audio>
+
+    <div class="BolasSorteadasJogo">
+        <h3>PAINEL BOLAS SORTEADAS</h3>
+        <ul>
+            <li class="anime">1</li>
+            <li class="anime">2</li>
+            <li class="anime">3</li>
+            <li class="anime">4</li>
+            <li class="anime">5</li>
+            <li class="anime">6</li>
+            <li class="anime">7</li>
+            <li class="anime">8</li>
+            <li class="anime">9</li>
+            <li class="anime">10</li>
+            <li class="anime">11</li>
+            <li class="anime">12</li>
+            <li class="anime">13</li>
+            <li class="anime">14</li>
+            <li class="anime">15</li>
+            <li class="anime">16</li>
+            <li class="anime">17</li>
+            <li class="anime">18</li>
+            <li class="anime">19</li>
+            <li class="anime">20</li>
+            <li class="anime">21</li>
+            <li class="anime">22</li>
+            <li class="anime">23</li>
+            <li class="anime">24</li>
+            <li class="anime">25</li>
+            <li class="anime">26</li>
+            <li class="anime">27</li>
+            <li class="anime">28</li>
+            <li class="anime">29</li>
+            <li class="anime">30</li>
+            <li class="anime">31</li>
+            <li class="anime">32</li>
+            <li class="anime">33</li>
+            <li class="anime">34</li>
+            <li class="anime">35</li>
+            <li class="anime">36</li>
+            <li class="anime">37</li>
+            <li class="anime">38</li>
+            <li class="anime">39</li>
+            <li class="anime">40</li>
+            <li class="anime">41</li>
+            <li class="anime">42</li>
+            <li class="anime">43</li>
+            <li class="anime">44</li>
+            <li class="anime">45</li>
+            <li class="anime">46</li>
+            <li class="anime">47</li>
+            <li class="anime">48</li>
+            <li class="anime">49</li>
+            <li class="anime">50</li>
+            <li class="anime">51</li>
+            <li class="anime">52</li>
+            <li class="anime">53</li>
+            <li class="anime">54</li>
+            <li class="anime">55</li>
+            <li class="anime">56</li>
+            <li class="anime">57</li>
+            <li class="anime">58</li>
+            <li class="anime">59</li>
+            <li class="anime">60</li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="assets/script/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    box-sizing: border-box;
+    background-image: url("../image/bingo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+.loading{
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    height: auto;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('../image/fundo3.jpg');
+    background-position: center;
+    background-size: cover;
+    margin: auto;
+    border-radius: 10px;
+    padding-bottom: 5px;
+    position: relative;
+    font-size: 14px;
+}
+.cartela{
+    width: 100%;
+    height: 100%;
+}
+#Nome_Jogador{
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+h3{
+    margin: 0;
+    background-color: black;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: white;
+    text-align: center;
+}
+#painelmaquina  li {
+    margin-top: -500px;
+}
+ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+ul,li{
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+li{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 22px;
+    color: #fff;
+    font-weight: bold;
+    margin: 5px 5px;
+    cursor: pointer;
+    transition: all .7s linear;
+    border-radius: 50px;
+    border: 1px solid white;
+    background-color: rgba(0,0,0, 0.7);
+}
+button{
+    padding:10px;
+}
+.containerprincipal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-items: center; 
+    padding: 20px;
+}
+.painel_Btn{
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+.painel_Btn button {
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.monitorSorteio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 290px;
+    height: 290px;
+    transition: all .7s linear;
+    background-image: url("../image/palco1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+@keyframes animeboll {
+    0%{transform: scale(0);}
+    50%{transform: scale(1);}
+    100%{transform: translateY(300px);}
+
+}
+.bolasSorteio{
+    animation-name: animeboll;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 40px;
+    background-color: #fff;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    line-height: 60px;
+    border: 2px solid #fff;
+    font-family: helvetica;
+    box-shadow: 1px 1px 5px #fff;
+    display: none;
+}
+.BolaSortedaPainel{
+    width: 130px;
+    height: 130px;
+    border-radius: 130px;
+    font-size: 50px;
+    font-weight: bold;
+    transition: all .7s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 90px;
+    margin-left: 10px;
+    background-color: #ccc;
+    border: 8px solid white;
+    display: none;
+    position: relative;   
+} 
+.paineldavitoria{
+    background-image: url("../image/ganhou1.gif");
+    background-position: center;
+    background-size: cover;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 35%;
+    display: none;
+}
+.BolasSorteadasJogo{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 450px;
+    height: auto;
+    background-color: #ccc;
+    margin-top: 20px;
+    margin: 5px auto;
+}
+.BolasSorteadasJogo ul li{
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 10px;
+    background-color: rgba(0,0,0, 0.7);
+}
+.jogador .gameover,
+.maquina .gameover{
+    width: 100%;
+    height: 310px;
+    background-image: url("../image/gameover.gif");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    bottom: 0;
+    display: none;
+}
+.jogador .winner{
+    width: 100%;
+    height: 310px;
+    background-image: url("../image/ganhou2.gif");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    bottom: 0;
+    display: none;
+}
+#painelmaquina{
+    height: 250px;
+    overflow: hidden;
+}
+.maquina .winner{
+    width: 100%;
+    height: 310px;
+    background-image: url("../image/ganhou2.gif");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    bottom: 0;
+    display: none;
+}
+#paineljogador{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+    height: 250px;
+}
+#paineljogador button{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    border: 1px solid;
+    margin: 5px 5px;
+    background: rgba(0, 0, 0, 0.6);
+    transition: all .7s linear;
+    margin-top: -250px;
+}
+.acertosmaquina{
+    color: white;
+    font-weight: bold;
+    transition: all .5s ease;
+    transform: rotateY(360deg);
+    border: 1px solid white;
+    background-color: rgba(0, 0, 255, 0.7);
+}
+.acertosjogador{
+    color: white;
+    font-weight: bold;
+    transition: all .5s linear;
+    transform: rotateY(360deg);
+    border: 1px solid white;
+    background:rgba(0, 255, 0, 0.7) !important; 
+}
+#Manual,#Status{
+    display: none;
+    margin-left: 0px;
+    font-size: 10px;
+    cursor: pointer;
+    border: 1px solid #000;
+    background-color: #00ff00;
+    font-weight: bold;
+}
+#Manual{
+    background-color: #ffff00;
+
+}
+@keyframes anime{
+    0%{transform: translateY(0px);}
+    100%{transform: translateY(3px);}
+}
+.anime{
+    animation-name: anime;
+    animation-duration: 2s;
+}
+@keyframes atencao{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+.padrao{
+    width: 110px;
+    height: auto;
+    position: absolute;
+    right: -5px;
+    top: -30px;
+    opacity: 0;
+}
+.BoladasorteJogador, 
+.BoladasorteMaquina{
+    animation-name: atencao;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
