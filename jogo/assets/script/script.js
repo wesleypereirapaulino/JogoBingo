@@ -8,6 +8,10 @@ let Cartela_Maquina = [];
 let Pontos_Marcados_Jogador = 0;
 let Pontos_Marcados_Maquina = 0;  
 
+//Imagem de carregamento da pagina.
+setTimeout(() => {
+    document.querySelector(".loading").style.display = "none"; 
+},5400);
 
 // Aqui sera gerado as 20 dezenas para cada cartela no jogo
 function GerarCartelas(){
@@ -73,7 +77,8 @@ function GerarCartelas(){
         }, wait); 
         bolas.play();               
         wait+= 70;   
-    }          
+    }   
+          
     
     // TRAVANDO O BOTAO PARA NÃO GERAR UMA NOVA CARTELA
     document.querySelector("#Btn_Gerar_Cartelas").disabled = true;
@@ -95,6 +100,8 @@ function GerarOutraCartela(){
     while(Cartela_Jogador.length > 0){
         for(let i in Cartela_Jogador){
             Cartela_Jogador.pop(i);
+            document.querySelectorAll("#paineljogador button")[i].innerHTML = "";
+
         }
     }
 
@@ -140,8 +147,7 @@ function StartGame(){
     let timer = 1000;
     let help_jogador = document.querySelectorAll("#paineljogador button");
       
-    // AUDIO DO JOGO
-    let champions = document.querySelector("#fim");    
+    // AUDIO DO JOGO   
     let y = document.getElementById("audio");  
     
 
@@ -151,9 +157,9 @@ function StartGame(){
             
             // NESSE BLOCO VERIFICA SE ALGUM DOS JOGADORES ACERTARAM TODOS OS NUMEROS DA CARTELA
             if(Pontos_Marcados_Jogador < 20 && Pontos_Marcados_Maquina < 20){
-                document.querySelector(".BolaSortedaPainel").innerHTML = painel;
                 document.querySelector(".bolasSorteio").style.display = "block";
                 document.querySelector(".bolasSorteio").innerHTML = painel;
+                document.querySelector(".BolaSortedaPainel").innerHTML = painel;
 
                 for(let i in maquina){
                     if(maquina[i].innerHTML == document.querySelector(".BolaSortedaPainel").innerHTML){
@@ -195,55 +201,17 @@ function StartGame(){
                         if(painelBolasSorteadas[i].innerHTML == document.querySelector(".BolaSortedaPainel").innerHTML){
                             document.querySelectorAll(".BolasSorteadasJogo li")[i].style.backgroundColor = "red";
                             document.querySelectorAll(".BolasSorteadasJogo li")[i].style.transform = "rotateY(360deg)";
-
                         }
                     } 
                 }, 2500);
 
-                if(Pontos_Marcados_Jogador == 19){
-                    document.querySelector(".jogador img").classList.add("BoladasorteJogador");
-                } 
-
-                if(Pontos_Marcados_Maquina == 19){
-                    document.querySelector(".maquina img").classList.add("BoladasorteMaquina");
-                }
-                
+                BolaDaSorte();            
 
                 // NARRAR BOLAS SORTEADAS NO JOGO
                 speechSynthesis.speak(new SpeechSynthesisUtterance(Bolas_Sorteadas[i])); 
             }  
 
-                               
-
-            if(Pontos_Marcados_Jogador == 20){   
-                document.querySelector(".jogador img").classList.remove("BoladasorteJogador");
-
-                setTimeout(() => {
-                    document.querySelector(".jogador .winner").style.display = "block";
-                    champions.play();  
-                    document.querySelector(".bolasSorteio").style.display = "none";
-                    document.querySelector(".monitorSorteio").style.height = 0+"px";   
-        
-                },3000);
-                
-                // Libera o botao de nova partida ao final do jogo.
-                document.querySelector("#New_Game").disabled = false;
-            }
-
-
-            if(Pontos_Marcados_Maquina == 20){               
-                setTimeout(() => {
-                    document.querySelector(".maquina .winner").style.display = "block";
-                    champions.play();     
-                    document.querySelector(".bolasSorteio").style.display = "none";
-                    document.querySelector(".monitorSorteio").style.height = 0+"px";
-                    document.querySelector(".maquina img").classList.remove("BoladasorteMaquina");
-                    
-                },3000);
-                
-                // Libera o botao de nova partida ao final do jogo.
-                document.querySelector("#New_Game").disabled = false;
-            } 
+            VencedorJogo();
             
         }, timer);
 
@@ -255,10 +223,108 @@ function StartGame(){
         document.querySelector("#Btn_Comeca_Jogo").disabled = true;
         document.querySelector(".novacartela").disabled = true;                
 
-    }, 500);  
+    }, 100);  
     
     document.querySelector("#Status").style.display = "inline-block";
     
+}
+
+function BolaDaSorte(){
+    switch (Pontos_Marcados_Jogador){
+        case 19:
+            document.querySelector(".jogador img").classList.add("BoladasorteJogador");
+        break;
+    }
+
+    switch (Pontos_Marcados_Maquina){
+        case 19:
+            document.querySelector(".maquina img").classList.add("BoladasorteMaquina");
+        break;
+    
+    }
+}
+
+//Funcao que verifica se algum dos jogadores acertaram todas as bolas da sua cartela.
+function VencedorJogo(){              
+    let champions = document.querySelector("#fim");    
+
+    switch (Pontos_Marcados_Jogador){
+        case 20:
+            document.querySelector(".jogador img").classList.remove("BoladasorteJogador");
+            document.querySelector("#Status").style.display = "none";
+            document.querySelector("#Manual").style.display = "none";
+            setTimeout(() => {
+                document.querySelector(".jogador .winner").style.display = "block";
+                champions.play();  
+                document.querySelector(".bolasSorteio").style.display = "none";
+                document.querySelector(".monitorSorteio").style.height = 0+"px"; 
+                
+            },1000);
+
+            // Libera o botao de nova partida ao final do jogo.
+            document.querySelector("#New_Game").disabled = false;
+        break;
+    }
+
+    switch (Pontos_Marcados_Maquina){
+        case 20:
+            document.querySelector(".maquina img").classList.remove("BoladasorteMaquina");
+            document.querySelector("#Status").style.display = "none";
+            document.querySelector("#Manual").style.display = "none";
+            setTimeout(() => {
+                document.querySelector(".maquina .winner").style.display = "block";
+                champions.play();     
+                document.querySelector(".bolasSorteio").style.display = "none";
+                document.querySelector(".monitorSorteio").style.height = 0+"px";   
+                
+            },1000);
+        
+            // Libera o botao de nova partida ao final do jogo.
+            document.querySelector("#New_Game").disabled = false;
+        break;
+    
+    }
+}
+
+// Nessa função o proprio jogador marca os numeros da sua cartela.
+function Jogador(e){         
+    let bolas_jogador = document.querySelectorAll("#paineljogador button")[e];
+    let painel = document.querySelector(".BolaSortedaPainel");
+    //Audio do jogo
+    let y = document.querySelector("#audio");
+    let champions = document.querySelector("#fim"); 
+
+    if(bolas_jogador.innerHTML == painel.innerHTML && bolas_jogador != ""){
+        y.currentTime = 0;   
+        y.play();
+        
+        Pontos_Marcados_Jogador++;     
+
+        document.querySelectorAll("#paineljogador button")[e].classList.add("acertosjogador");
+        document.querySelectorAll("#paineljogador button")[e].disabled = true;
+        document.querySelectorAll("#paineljogador button")[e].style.border = "1px solid #00ff00"
+    }
+
+    if(Pontos_Marcados_Jogador == 19){
+        document.querySelector(".jogador img").classList.add("BoladasorteJogador");
+    }
+
+    switch (Pontos_Marcados_Jogador) {
+        case 20:
+            document.querySelector(".jogador img").classList.remove("BoladasorteJogador");
+            setTimeout(() => {
+                document.querySelector(".jogador .winner").style.display = "block";
+                champions.play();  
+                document.querySelector(".bolasSorteio").style.display = "none";
+                document.querySelector(".monitorSorteio").style.height = 0+"px";  
+                document.querySelector("#Status").style.display = "none";
+                document.querySelector("#Manual").style.display == "none";
+            },2000);
+
+            // Libera o botao de nova partida ao final do jogo.
+            document.querySelector("#New_Game").disabled = false;
+        break;
+    }
 }
 
 // Esse bloco ativa a marcação automatica da cartela do jogador
@@ -273,47 +339,7 @@ function JogoManual(){
     document.querySelector("#Status").style.display = "inline-block";
 }
 
-// Nessa função o proprio jogador marca os numeros da sua cartela.
-function Marcador(e){  
-    let y = document.querySelector("#audio");
-    //let x = document.querySelector("#bingo");
-    let bolas_jogador = document.querySelectorAll("#paineljogador button")[e].innerHTML;
-    let painel = document.querySelector(".BolaSortedaPainel").innerHTML;
-
-    if(bolas_jogador == painel && bolas_jogador != ""){
-        y.currentTime = 0;   
-        y.play();
-        
-        Pontos_Marcados_Jogador++;     
-
-        document.querySelectorAll("#paineljogador button")[e].classList.add("acertosjogador");
-        document.querySelectorAll("#paineljogador button")[e].disabled = true;
-        document.querySelectorAll("#paineljogador button")[e].style.border = "1px solid #00ff00"
-    }
-    if(Pontos_Marcados_Jogador == 20){ 
-        document.querySelector(".jogador img").classList.remove("BoladasorteJogador");
-
-        setTimeout(() => {
-            document.querySelector(".jogador .winner").style.display = "block";
-            champions.play();  
-            document.querySelector(".bolasSorteio").style.display = "none";
-            document.querySelector(".monitorSorteio").style.height = 0+"px";   
-
-        },2000);
-        
-        // Libera o botao de nova partida ao final do jogo.
-        document.querySelector("#New_Game").disabled = false;
-    }
-    if(Pontos_Marcados_Jogador == 19){
-        document.querySelector(".jogador img").classList.add("BoladasorteJogador");
-    }
-}
-
 // Botão para iniciar uma nova rodada esse botao só é liberado quando o jogo é finalizado.
 function NewGame(){
     document.location.reload(true);
 }
-
-setTimeout(() => {
-    document.querySelector(".loading").style.display = "none"; 
-},5500);
